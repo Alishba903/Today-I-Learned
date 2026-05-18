@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Today I learned</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=calendar_today"
+    />
+  </head>
+  <body>
+      <header>
+        <div class="title-header">
+          <img class="logo-img" src="./images/book.png" alt="site logo" />
+          <div class="title">
+            <h3 class="site-title">Today I Learned</h3>
+            <p class="sub-title">Track your coding journey.</p>
+          </div>
+        </div>
+
+        <a href="new-learning.html" class="add-btn btn">
+          <span class="material-symbols-outlined">add</span>
+          Add New Learning
+        </a>
+      </header>
+
+      <main id="cards-container" class="cards-container">
+        <div class="card">
+          <!-- Card Header -->
+          <div class="card-header">
+            <span class="category-name"> JavaScript </span>
+
+            <div class="card-date">
+              <span class="material-symbols-outlined"> calendar_today </span>
+
+              <span class="date-text"> 18 May 2026 </span>
+            </div>
+          </div>
+
+          <!-- Card Body -->
+          <div class="learning-details">
+            <h3 class="learning-topic">Event Loop</h3>
+
+            <p class="learning-description">
+              Learned how JavaScript handles asynchronous operations using the
+              event loop, callback queue, and call stack.
+            </p>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="fav-del">
+            <span class="add-fav"> ★ Favorite </span>
+
+            <span class="delete"> Delete </span>
+          </div>
+        </div>
+      </main>
+
+    <footer>
+      <p>&copy; All right reserved by Alishba</p>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>

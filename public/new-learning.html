@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Today I Learned: Add</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=send"
+    />
+  </head>
+  <body>
+      <header>
+        <div class="title-header">
+          <img class="logo-img" src="./images/book.png" alt="site logo" />
+          <div class="title">
+            <h3 class="site-title">Today I Learned</h3>
+            <p class="sub-title">Track you coding journey.</p>
+          </div>
+        </div>
+
+        <a href="index.html" class="back-btn btn"> Back </a>
+      </header>
+
+      <main class="form-container" aria-labelledby="form-title">
+        <div class="form-heading">
+          <div class="form-img-shad">
+            <img src="./images/notepen.png" alt="" class="form-img" />
+          </div>
+          <h1 class="form-title" id="form-title">Add New Learning</h1>
+          <p class="form-sub-title">Capture what you learned today!</p>
+        </div>
+
+        <form action="" id="eventform" class="event-form">
+          <!-- Title Field -->
+          <div class="title-category">
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+              class="input-title"
+              required
+            />
+
+            <!-- Category Field -->
+            <select name="category" id="category" class="category-select">
+              <option value="" disabled selected>Select Category</option>
+              <option value="HTML">HTML</option>
+              <option value="CSS">CSS</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Node.js">Node.js</option>
+              <option value="React">React</option>
+              <option value="Git & Github">Git & Github</option>
+              <option value="Backend">Backend</option>
+              <option value="Frontend">Frontend</option>
+              <option value="UI/UX">UI/UX</option>
+              <option value="Debugging">Debugging</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- Textarea Field -->
+          <textarea
+            id="details"
+            name="details"
+            rows="5"
+            placeholder="What did you learn today?"
+            class="input-details"
+          ></textarea>
+
+          <button type="submit" class="submit-btn btn">
+            Save Learning <span class="material-symbols-outlined"> send </span>
+          </button>
+        </form>
+      </main>
+
+    <footer>
+      <p>&copy; All right reserved by Alishba</p>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>
