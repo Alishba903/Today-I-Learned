@@ -1,5 +1,6 @@
 const cardsContainer = document.getElementById("cards-container");
 
+function getLearnings(){
 const learnings = [
   {
     id: 1,
@@ -62,6 +63,12 @@ const learnings = [
   },
 ];
 
+renderLearnings(learnings);
+}
+
+
+function renderLearnings(learnings){
+
 let cards = learnings.map((learning)=>`
     <div class="card">
           <!-- Card Header -->
@@ -93,3 +100,6 @@ let cards = learnings.map((learning)=>`
         </div>`).join("");
 
 cardsContainer.innerHTML = cards;
+}
+
+getLearnings();
