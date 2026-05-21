@@ -76,7 +76,7 @@ let cards = learnings.map((learning)=>`
             <span class="category-name"> ${learning.category} </span>
 
             <div class="card-date">
-              <span class="material-symbols-outlined"> calendar_today </span>
+              <i class="fa-regular fa-calendar"></i>
 
               <span class="date-text"> ${learning.date} </span>
             </div>
