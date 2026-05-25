@@ -1,9 +1,19 @@
 import http from 'node:http';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 
 const PORT = 5000;
+const __dirname = import.meta.dirname;
 
-const server = http.createServer((req, res) => {
-  res.end("Hello from Backend!");
+const server = http.createServer( async (req, res) => {
+
+  const pathToResource = path.join(__dirname, 'public', 'index.html');
+
+  const content = await fs.readFile(pathToResource, 'utf8')
+  res.statusCode = 200;
+  res.setHeader = ('Content-Typs', 'text/html')
+
+  res.end(content);
 });
 
 server.listen(PORT, () => {

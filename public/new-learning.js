@@ -1,21 +1,46 @@
-const form = document.getElementById("eventform")
-const formMessage = document.getElementsByClassName("form-message")[0]
+const form = document.getElementById("eventform");
+const formMessage = document.getElementsByClassName("form-message")[0];
 
-form.addEventListener("submit", function(event){
-    event.preventDefault();
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-    const title = document.getElementById("title").value
-    const category = document.getElementById("category").value
-    const details = document.getElementById("details").value
+  const title = document.getElementById("title").value;
+  const category = document.getElementById("category").value;
+  const details = document.getElementById("details").value;
 
-    if(!title || !category || !details){
-        formMessage.textContent = "Please Complete All Fields!"
+  if (!title || !category || !details) {
+    formMessage.textContent = "Please Complete All Fields!";
 
-        return
+    return;
+  }
+
+  const formData = {
+    title: title,
+    category: category,
+    details: details,
+  };
+
+  try {
+    formMessage.textContent = "";
+    const response = await fetch("./api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      formMessageText.innerHTML = `Your Learning was uploaded. View it <a href="./index.html">here</a>.`;
+      form.reset();
+    } else {
+      formMessage.textContent = `The server Ghosted you(!). Please try again.`;
+      console.error("Server Error:", response.statusText);
     }
+  } catch (err) {
+    formMessage.textContent = `Serious ghouls! Please try again.`
+    console.error("Error:", error)
+  }
+});
 
-    console.log(title, category, details)
-
-})
-
-console.log(form)
+console.log(form);
