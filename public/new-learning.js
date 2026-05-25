@@ -38,8 +38,8 @@ form.addEventListener("submit", async function (event) {
       console.error("Server Error:", response.statusText);
     }
   } catch (err) {
-    formMessage.textContent = `Serious ghouls! Please try again.`
-    console.error("Error:", error)
+    formMessage.textContent = `Oops! My wires got crossed. Could you try uploading again?`;
+    console.error("Error:", error);
   }
 });
 
