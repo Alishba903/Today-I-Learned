@@ -7,7 +7,6 @@
     "description": "Learned how JavaScript handles asynchronous operations using the call stack, callback queue, and event loop.",
     "favorite": true
   },
-
   {
     "id": 2,
     "category": "CSS",
@@ -16,7 +15,6 @@
     "description": "Practiced creating modern glassmorphism effects using backdrop-filter, transparency, and glow shadows.",
     "favorite": false
   },
-
   {
     "id": 3,
     "category": "Node.js",
@@ -25,7 +23,6 @@
     "description": "Built a basic HTTP server using vanilla Node.js and learned how routing works without Express.",
     "favorite": false
   },
-
   {
     "id": 4,
     "category": "HTML",
@@ -34,7 +31,6 @@
     "description": "Understood semantic tags like header, main, section, article, and footer for better structure and accessibility.",
     "favorite": true
   },
-
   {
     "id": 5,
     "category": "Git & GitHub",
@@ -43,7 +39,6 @@
     "description": "Learned how to initialize git, commit changes, and push projects to GitHub repositories.",
     "favorite": false
   },
-
   {
     "id": 6,
     "category": "Frontend",
@@ -52,7 +47,6 @@
     "description": "Practiced building responsive layouts using flexbox, CSS grid, and media queries.",
     "favorite": true
   },
-
   {
     "id": 7,
     "category": "React",
@@ -61,7 +55,6 @@
     "description": "Learned how to manage component state using the useState hook and update UI dynamically.",
     "favorite": false
   },
-
   {
     "id": 8,
     "category": "Backend",
@@ -70,7 +63,6 @@
     "description": "Explored REST architecture and learned how GET, POST, PUT, and DELETE requests work.",
     "favorite": true
   },
-
   {
     "id": 9,
     "category": "MongoDB",
@@ -79,7 +71,6 @@
     "description": "Practiced inserting, updating, deleting, and fetching documents using MongoDB queries.",
     "favorite": false
   },
-
   {
     "id": 10,
     "category": "DSA",
@@ -87,5 +78,10 @@
     "topic": "Binary Search",
     "description": "Solved multiple binary search problems and understood time complexity optimization.",
     "favorite": true
+  },
+  {
+    "topic": "Node.js",
+    "category": "Backend",
+    "description": "Learning how to write backend in nodejs."
   }
 ]

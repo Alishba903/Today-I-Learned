@@ -4,20 +4,20 @@ const formMessage = document.getElementsByClassName("form-message")[0];
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
-  const title = document.getElementById("title").value;
+  const topic = document.getElementById("title").value;
   const category = document.getElementById("category").value;
-  const details = document.getElementById("details").value;
+  const description = document.getElementById("details").value;
 
-  if (!title || !category || !details) {
+  if (!topic || !category || !description) {
     formMessage.textContent = "Please Complete All Fields!";
 
     return;
   }
 
   const formData = {
-    title: title,
+    topic: topic,
     category: category,
-    details: details,
+    description: description,
   };
 
   try {
@@ -31,7 +31,7 @@ form.addEventListener("submit", async function (event) {
     });
 
     if (response.ok) {
-      formMessageText.innerHTML = `Your Learning was uploaded. View it <a href="./index.html">here</a>.`;
+      formMessage.innerHTML = `Your Learning was uploaded. View it <a href="./index.html">here</a>.`;
       form.reset();
     } else {
       formMessage.textContent = `The server Ghosted you(!). Please try again.`;
@@ -39,7 +39,7 @@ form.addEventListener("submit", async function (event) {
     }
   } catch (err) {
     formMessage.textContent = `Oops! My wires got crossed. Could you try uploading again?`;
-    console.error("Error:", error);
+    console.error("Error:", err);
   }
 });
 
