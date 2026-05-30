@@ -1,13 +1,11 @@
 const cardsContainer = document.getElementById("cards-container");
 
-async function getLearnings() {
-  try {
-    const data = await fetch("/api");
-    const response = await data.json();
-    renderLearnings(response);
-  } catch (err) {
-    console.log(err);
-  }
+try {
+  const data = await fetch("/api")
+  const response = await data.json()
+  renderLearnings(response)
+} catch (err) {
+  console.log(err);
 }
 
 function renderLearnings(learnings) {
@@ -47,5 +45,3 @@ function renderLearnings(learnings) {
 
   cardsContainer.innerHTML = cards;
 }
-
-getLearnings();

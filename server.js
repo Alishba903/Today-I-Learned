@@ -1,24 +1,11 @@
-import http from 'node:http';
-import path from 'node:path';
-import fs from 'node:fs/promises';
-import { getContentType } from './utils/getContentType.js';
-import { sendResponse } from './utils/sendResponse.js';
-import { serveStatic } from './utils/serveStatic.js';
-import { getData } from './utils/getData.js'
+import http from 'node:http'
 
-const PORT = 9000;
-const __dirname = import.meta.dirname;
+const PORT = 2000
 
-const server = http.createServer( async (req, res) => {
+const server = http.createServer((req, res)=>{
+  res.end("Hello again! before I just made a mess!");
+})
 
-  if(req.url.startsWith("/")){
-    return await serveStatic(req, res, __dirname);
-  }else if (req.url.startsWith("/api")){
-    
-  }
-  
-});
-
-server.listen(PORT, () => {
-  console.log(`Connected on port: ${PORT}`);
-});
+server.listen(PORT, ()=>{
+  console.log(`Server is connected : ${PORT}`)
+})
