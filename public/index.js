@@ -45,3 +45,10 @@ function renderLearnings(learnings) {
 
   cardsContainer.innerHTML = cards;
 }
+
+cardsContainer.addEventListener("click", (event)=>{
+  if(event.target.classList.contains('delete')){
+    const card = event.target.closest(".card");
+    card.remove();
+  }
+})
