@@ -10,14 +10,23 @@ form.addEventListener("submit", async function (event) {
 
   if (!topic || !category || !description) {
     formMessage.textContent = "Please Complete All Fields!";
-
     return;
   }
+
+  const date = new Date().toLocaleDateString(
+    "en-GB", 
+    {
+      day: "numeric", 
+      month: "short", 
+      year: "numeric"
+    }
+  );
 
   const formData = {
     topic: topic,
     category: category,
     description: description,
+    date: date
   };
 
   try {

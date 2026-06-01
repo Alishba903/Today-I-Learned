@@ -80,8 +80,15 @@
     "favorite": true
   },
   {
-    "topic": "Node.js",
-    "category": "Backend",
-    "description": "Learning how to write backend in nodejs."
+    "topic": "Date() constructor",
+    "category": "JavaScript",
+    "description": "Okay it's good to do ",
+    "date": "1 Jun 2026"
+  },
+  {
+    "topic": "Let's have a check in Date()",
+    "category": "JavaScript",
+    "description": "I am checking the date() constructor is it working well ?",
+    "date": "1 Jun 2026"
   }
 ]
