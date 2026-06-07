@@ -1,14 +1,22 @@
-import path from 'node:path'
-import fs from 'node:fs/promises'
-import { getData } from './getData.js'
+import path from "node:path";
+import fs from "node:fs/promises";
+import { getData } from "./getData.js";
+import { writeData } from "./writeData.js";
 
-export async function addNewLearning(newLearning){
-    try{
-        let learnings = await getData()
-        learnings.push(newLearning)
-        const pathToData = path.join('data', 'data.json')
-        await fs.writeFile(pathToData, JSON.stringify(learnings, null, 2), 'utf8')
-    }catch(err){
-        throw new Error(err)
-    }
+export async function addNewLearning(newLearning) {
+  const learningWithId = {
+    id: Date.now(),
+    favorite: false,
+    ...newLearning,
+  };
+  try {
+
+    let learnings = await getData();
+    learnings.push(learningWithId);
+    await writeData(learnings)
+    return learningWithId;
+
+  } catch (err) {
+    throw new Error(err);
+  }
 }

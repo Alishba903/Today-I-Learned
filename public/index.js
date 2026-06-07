@@ -12,7 +12,7 @@ function renderLearnings(learnings) {
   let cards = learnings
     .map(
       (learning) => `
-    <div class="card">
+    <div class="card" data-id="${learning.id}">
           <!-- Card Header -->
           <div class="card-header">
             <span class="category-name"> ${learning.category} </span>
@@ -46,9 +46,21 @@ function renderLearnings(learnings) {
   cardsContainer.innerHTML = cards;
 }
 
-cardsContainer.addEventListener("click", (event)=>{
-  if(event.target.classList.contains('delete')){
+cardsContainer.addEventListener("click", async (event)=>{
+   if (event.target.classList.contains('delete')) {
     const card = event.target.closest(".card");
-    card.remove();
+    const id = card.dataset.id;
+
+    try {
+      const response = await fetch(`./api/${id}`, { method: "DELETE" });
+      if (response.ok) {
+        card.remove();
+      } else {
+        console.error("Server error:", response.status);
+      }
+    } catch (error) {
+      // This will catch ERR_CONNECTION_REFUSED
+      console.error("Network error or server is down:", error);
+    }
   }
 })
