@@ -51,5 +51,3 @@ form.addEventListener("submit", async function (event) {
     console.error("Error:", err);
   }
 });
-
-console.log(form);

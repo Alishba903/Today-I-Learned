@@ -12,16 +12,16 @@ const server = http.createServer(async (req, res) => {
   try {
     //serve data endpoint
     if (req.url.startsWith("/api")) {
-      console.log(req.method)
-      console.log(req.url)
       if (req.method === "GET") {
         return await handleGet(res);
       } else if (req.method === "POST") {
         return await handlePost(req, res);
       }else if(req.method === "DELETE"){
         const id = Number(req.url.split("/")[2])
-        return await handleDelete(id, res)
-
+        return await handleDelete(id, res);
+      }else if (req.method === "PATCH"){
+        const id = Number(req.url.split("/")[3])
+        return await handlePatch(id, res);
       }
     }
 

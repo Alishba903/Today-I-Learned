@@ -497,6 +497,7 @@ footer {
     margin-top: 24px;
 
     padding-top: 18px;
+    cursor: pointer;
 
     border-top:
     1px solid rgba(255,255,255,0.05);
@@ -504,7 +505,7 @@ footer {
 
 /* ACTION BUTTONS */
 
-.add-fav,
+.favorite,
 .delete{
     cursor: pointer;
 
@@ -517,11 +518,11 @@ footer {
 
 /* FAVORITE */
 
-.add-fav{
+.favorite{
     color: #C084FC;
 }
 
-.add-fav:hover{
+.favorite:hover{
     color: #E9D5FF;
 }
 

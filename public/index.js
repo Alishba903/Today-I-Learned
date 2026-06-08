@@ -1,9 +1,9 @@
 const cardsContainer = document.getElementById("cards-container");
 
 try {
-  const data = await fetch("/api")
-  const response = await data.json()
-  renderLearnings(response)
+  const data = await fetch("/api");
+  const response = await data.json();
+  renderLearnings(response);
 } catch (err) {
   console.log(err);
 }
@@ -35,7 +35,7 @@ function renderLearnings(learnings) {
 
           <!-- Card Footer -->
           <div class="fav-del">
-            <span class="add-fav"> ★ Favorite </span>
+            <span class="favorite"> ${learning.favorite ? "⭐" : "☆"} </span>
 
             <span class="delete"> Delete </span>
           </div>
@@ -46,21 +46,31 @@ function renderLearnings(learnings) {
   cardsContainer.innerHTML = cards;
 }
 
-cardsContainer.addEventListener("click", async (event)=>{
-   if (event.target.classList.contains('delete')) {
+cardsContainer.addEventListener("click", async (event) => {
+  if (event.target.classList.contains("delete")) {
     const card = event.target.closest(".card");
     const id = card.dataset.id;
 
     try {
-      const response = await fetch(`./api/${id}`, { method: "DELETE" });
+      const response = await fetch(`/api/${id}`, { method: "DELETE" });
       if (response.ok) {
         card.remove();
       } else {
         console.error("Server error:", response.status);
       }
     } catch (error) {
-      // This will catch ERR_CONNECTION_REFUSED
       console.error("Network error or server is down:", error);
     }
+  } else if (event.target.classList.contains("favorite")) {
+    const card = event.target.closest(".card");
+    const id = card.dataset.id;
+
+    const response = await fetch(`/api/favorite/${id}`, { method: "PATCH" });
+    if (!response.ok) {
+      console.error("Failed to update favorite");
+      return;
+    }
+    const data = await response.json();
+    event.target.textContent = data.favorite ? "⭐" : "☆";
   }
-})
+});
