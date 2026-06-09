@@ -35,7 +35,7 @@ function renderLearnings(learnings) {
 
           <!-- Card Footer -->
           <div class="fav-del">
-            <span class="favorite"> ${learning.favorite ? "⭐" : "☆"} </span>
+            <span class="favorite"> ${learning.favorite ? "★" : "☆"} </span>
 
             <span class="delete"> Delete </span>
           </div>
@@ -65,12 +65,15 @@ cardsContainer.addEventListener("click", async (event) => {
     const card = event.target.closest(".card");
     const id = card.dataset.id;
 
-    const response = await fetch(`/api/favorite/${id}`, { method: "PATCH" });
-    if (!response.ok) {
-      console.error("Failed to update favorite");
-      return;
+    try {
+      const response = await fetch(`/api/favorite/${id}`, { method: "PATCH" });
+
+      const data = await response.json();
+      const favoriteElement = event.target;
+
+      favoriteElement.textContent = data.favorite ? "★" : "☆";
+    } catch (err) {
+      console.log("Error while getting response", err);
     }
-    const data = await response.json();
-    event.target.textContent = data.favorite ? "⭐" : "☆";
   }
 });

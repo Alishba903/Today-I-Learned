@@ -33,19 +33,26 @@ export async function handleDelete(id, res) {
 
 export async function handlePatch(id, res) {
   const learnings = await getData();
-  const learning = learnings.find((learning) => learning.id === id);
-  if (!learning) {
-    sendResponse(res, 404, "application/json", {
-      message: "Learning not found",
-    });
-    
-  } else {
-    learning.favorite = !learning.favorite;
+  const UpdateFavLearning = learnings.find((learning) => learning.id === id);
+
+  try {
+    if (!UpdateFavLearning) {
+      sendResponse(res, 404, "application/json", {
+        message: "Learning Not Found!",
+      });
+    }
+
+    UpdateFavLearning.favorite = !UpdateFavLearning.favorite;
     await writeData(learnings);
     sendResponse(res, 200, "application/json", {
-        message: "Favorite updated",
-        favorite: learning.favorite
-    })
-    
+      message: "Learning Updated Successfully",
+      favorite: UpdateFavLearning.favorite,
+    });
+  } catch (err) {
+    console.error(err);
+
+    sendResponse(res, 500, "application/json", {
+      message: "Internal Server Error",
+    });
   }
 }
