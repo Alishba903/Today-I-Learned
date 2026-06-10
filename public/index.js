@@ -68,12 +68,17 @@ cardsContainer.addEventListener("click", async (event) => {
     try {
       const response = await fetch(`/api/favorite/${id}`, { method: "PATCH" });
 
+      if(!response.ok){
+        throw new Error(`Server responded with ${response.status}`)
+      }
+
       const data = await response.json();
       const favoriteElement = event.target;
 
       favoriteElement.textContent = data.favorite ? "★" : "☆";
+      
     } catch (err) {
-      console.log("Error while getting response", err);
+      console.error("Failed to update favorite:", err );
     }
   }
 });

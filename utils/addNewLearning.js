@@ -4,7 +4,7 @@ import { getData } from "./getData.js";
 import { writeData } from "./writeData.js";
 
 export async function addNewLearning(newLearning) {
-  const learningWithId = {
+  const learning = {
     id: Date.now(),
     favorite: false,
     ...newLearning,
@@ -12,9 +12,9 @@ export async function addNewLearning(newLearning) {
   try {
 
     let learnings = await getData();
-    learnings.push(learningWithId);
+    learnings.push(learning);
     await writeData(learnings)
-    return learningWithId;
+    return learning;
 
   } catch (err) {
     throw new Error(err);

@@ -1,6 +1,4 @@
 import http from "node:http";
-import path from "node:path";
-import fs from "node:fs/promises";
 import { serveStatic } from "./utils/serveStatic.js";
 import { sendResponse } from "./utils/sendResponse.js";
 import {
@@ -15,6 +13,7 @@ const __dirname = import.meta.dirname;
 
 const server = http.createServer(async (req, res) => {
   try {
+    const segments = req.url.split("/");
     //serve data endpoint
     if (req.url.startsWith("/api")) {
       if (req.method === "GET") {
@@ -22,21 +21,25 @@ const server = http.createServer(async (req, res) => {
       } else if (req.method === "POST") {
         return await handlePost(req, res);
       } else if (req.method === "DELETE") {
-        const id = Number(req.url.split("/")[2]);
+        const id = Number(segments[2]);
         return await handleDelete(id, res);
       } else if (
         req.method === "PATCH" &&
         req.url.startsWith("/api/favorite/")
       ) {
-        const id = Number(req.url.split("/")[3]);
+        const id = Number(segments[3]);
         return await handlePatch(id, res);
       }
+
+      return sendResponse(res, 404, "application/json", {
+        message: "API Route Not Found"
+      })
     }
 
     serveStatic(req, res, __dirname);
   } catch (err) {
-    sendResponse(res, 200, "application/json", {
-      message: "Not Found",
+    sendResponse(res, 500, "application/json", {
+      message: "Internal Server Error"
     });
   }
 });
