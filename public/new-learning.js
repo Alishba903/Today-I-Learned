@@ -1,12 +1,12 @@
 const form = document.getElementById("eventform");
-const formMessage = document.getElementsByClassName("form-message")[0];
+const formMessage = document.querySelector(".form-message")[0];
 
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
-  const topic = document.getElementById("title").value;
-  const category = document.getElementById("category").value;
-  const description = document.getElementById("details").value;
+  const topic = document.getElementById("title").value.trim();
+  const category = document.getElementById("category").value.trim();
+  const description = document.getElementById("details").value.trim();
 
   if (!topic || !category || !description) {
     formMessage.textContent = "Please Complete All Fields!";
@@ -23,10 +23,10 @@ form.addEventListener("submit", async function (event) {
   );
 
   const formData = {
-    topic: topic,
-    category: category,
-    description: description,
-    date: date
+    topic,
+    category,
+    description,
+    date
   };
 
   try {

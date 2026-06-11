@@ -1,15 +1,20 @@
 const cardsContainer = document.getElementById("cards-container");
 
 try {
-  const data = await fetch("/api");
-  const response = await data.json();
-  renderLearnings(response);
+  const response = await fetch("/api");
+
+  if(!response.ok){
+    throw new Error("Failed to load learnings")
+  }
+
+  const  learnings = await response.json();
+  renderLearnings(learnings);
 } catch (err) {
   console.log(err);
 }
 
 function renderLearnings(learnings) {
-  let cards = learnings
+  const cards = learnings
     .map(
       (learning) => `
     <div class="card" data-id="${learning.id}">

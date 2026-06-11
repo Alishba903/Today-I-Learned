@@ -5,9 +5,9 @@ import { sendResponse } from './sendResponse.js'
 
 export async function serveStatic(req, res, baseDir){
 
-    const publicDir = path.join(baseDir, 'public')
+    const PUBLIC_DIR = path.join(baseDir, "public");
     const filePath = path.join(
-        publicDir,
+        PUBLIC_DIR,
         req.url === '/' ? 'index.html' : req.url
     )
 
@@ -16,8 +16,11 @@ export async function serveStatic(req, res, baseDir){
 
     try{
         const content = await fs.readFile(filePath)
-        sendResponse(res, 200, contentType, content)
+        return sendResponse(res, 200, contentType, content)
     }catch(err){
-        console.log(`Error while serving files ${err}`)
+        console.error(`Error while serving file ${err.message}`)
+        return sendResponse(res, 404, "application/json", {
+            message: "File not found"
+        })
     }
 }
