@@ -2,6 +2,7 @@ import { addNewLearning } from "../utils/addNewLearning.js";
 import { getData } from "../utils/getData.js";
 import { parseJSONBody } from "../utils/parseJSONBody.js";
 import { sendResponse } from "../utils/sendResponse.js";
+import { validateLearning } from "../utils/validateLearning.js";
 import { writeData } from "../utils/writeData.js";
 
 export async function handleGet(res) {
@@ -12,9 +13,10 @@ export async function handleGet(res) {
 export async function handlePost(req, res) {
   try {
     const parsedBody = await parseJSONBody(req);
-    if(!parsedBody.topic?.trim()){
+    const validLearning = validateLearning(parsedBody)
+    if(!validLearning.valid){
       return sendResponse(res, 400, "application/json", {
-        error: "Topic is required"
+        message: validLearning.message
       })
     }
     const newLearning = await addNewLearning(parsedBody);

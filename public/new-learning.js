@@ -1,5 +1,5 @@
 const form = document.getElementById("eventform");
-const formMessage = document.querySelector(".form-message")[0];
+const formMessage = document.querySelector(".form-message");
 
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
