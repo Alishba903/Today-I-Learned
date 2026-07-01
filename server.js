@@ -6,7 +6,8 @@ import {
   handlePost,
   handleDelete,
   handlePatch,
-  handleGetById
+  handleGetById,
+  handlePut
 } from "./handlers/routeHandlers.js";
 
 const PORT = 2000;
@@ -37,6 +38,9 @@ const server = http.createServer(async (req, res) => {
       ) {
         const id = Number(segments[3]);
         return await handlePatch(id, res);
+      } else if (req.method === "PUT"){
+        const id = Number(segments[2]);
+        return await handlePut(id, req, res);
       }
 
       return sendResponse(res, 404, "application/json", {

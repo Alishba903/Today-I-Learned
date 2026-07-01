@@ -10,40 +10,36 @@ export async function handleGet(res) {
   return sendResponse(res, 200, "application/json", data);
 }
 
-export async function handleGetById(id, res){
+export async function handleGetById(id, res) {
   const data = await getData();
 
-  const learning = data.find((lrning) =>{
-     return lrning.id === id
-  })
+  const learning = data.find((lrning) => {
+    return lrning.id === id;
+  });
 
-  try{
-    if(!learning){
+  try {
+    if (!learning) {
       return sendResponse(res, 404, "application/json", {
-        message: "Learning Not Found"
-      })
+        message: "Learning Not Found",
+      });
     }
     return sendResponse(res, 200, "application/json", learning);
-
-  }catch(err){
+  } catch (err) {
     console.error(err);
-    console.log("erro in handleGetById");
     return sendResponse(res, 500, "application/json", {
       message: "Internal Server Error",
     });
   }
-
-  
 }
 
 export async function handlePost(req, res) {
   try {
     const parsedBody = await parseJSONBody(req);
-    const validLearning = validateLearning(parsedBody)
-    if(!validLearning.valid){
+    const validLearning = validateLearning(parsedBody);
+    if (!validLearning.valid) {
       return sendResponse(res, 400, "application/json", {
-        message: validLearning.message
-      })
+        message: validLearning.message,
+      });
     }
     const newLearning = await addNewLearning(parsedBody);
     return sendResponse(res, 201, "application/json", newLearning);
@@ -96,6 +92,38 @@ export async function handlePatch(id, res) {
   }
 }
 
-export async function handlePut(id, req, res){
-  
+export async function handlePut(id, req, res) {
+  const data = await getData();
+
+  let learning = data.find((lrning) => lrning.id === id);
+
+  try {
+    if (!learning) {
+      return sendResponse(res, 404, "application/json", {
+        message: "Learning Not Found",
+      });
+    }
+
+    const parsedBody = await parseJSONBody(req);
+    const validLearning = validateLearning(parsedBody);
+    if (!validLearning.valid) {
+      return sendResponse(res, 400, "application/json", {
+        message: validLearning.message,
+      });
+    }
+
+    learning.topic = parsedBody.topic;
+    learning.category = parsedBody.category;
+    learning.description = parsedBody.description;
+    learning.date = parsedBody.date;
+
+    await writeData(data);
+    return sendResponse(res, 200, "application/json", {
+      message: "Learning Updated Successfully",
+      learning,
+    });
+
+  } catch (err) {
+    return sendResponse(res, 400, "application/json", { error: err.message });
+  }
 }
