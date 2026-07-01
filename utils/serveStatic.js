@@ -5,10 +5,11 @@ import { sendResponse } from './sendResponse.js'
 
 export async function serveStatic(req, res, baseDir){
 
+
     const PUBLIC_DIR = path.join(baseDir, "public");
     const filePath = path.join(
         PUBLIC_DIR,
-        req.url === '/' ? 'index.html' : req.url
+        req.url === '/' ? 'index.html' : req.url.split("?")[0]
     )
 
     const ext = path.extname(filePath)

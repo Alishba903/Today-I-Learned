@@ -6,6 +6,7 @@ import {
   handlePost,
   handleDelete,
   handlePatch,
+  handleGetById
 } from "./handlers/routeHandlers.js";
 
 const PORT = 2000;
@@ -17,10 +18,17 @@ const server = http.createServer(async (req, res) => {
     //serve data endpoint
     if (req.url.startsWith("/api")) {
       if (req.method === "GET") {
-        return await handleGet(res);
+        if(segments.length === 2 && segments[1] === "api"){
+         return await handleGet(res);
+        } else if (segments.length === 3){
+          const id = Number(segments[2]);
+          return await handleGetById(id, res);
+        }
       } else if (req.method === "POST") {
         return await handlePost(req, res);
-      } else if (req.method === "DELETE") {
+      } else if (
+        req.method === "DELETE"
+      ) {
         const id = Number(segments[2]);
         return await handleDelete(id, res);
       } else if (

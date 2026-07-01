@@ -41,6 +41,7 @@ function renderLearnings(learnings) {
           <!-- Card Footer -->
           <div class="fav-del">
             <span class="favorite"> ${learning.favorite ? "★" : "☆"} </span>
+            <span class="edit">Edit</span>
 
             <span class="delete"> Delete </span>
           </div>
@@ -85,5 +86,10 @@ cardsContainer.addEventListener("click", async (event) => {
     } catch (err) {
       console.error("Failed to update favorite:", err );
     }
-  }
+  } else if (event.target.classList.contains("edit")) {
+    const card = event.target.closest(".card");
+    const id = card.dataset.id;
+
+    window.location.href = `new-learning.html?id=${id}`;
+}
 });
