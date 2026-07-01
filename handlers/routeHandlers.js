@@ -93,9 +93,9 @@ export async function handlePatch(id, res) {
 }
 
 export async function handlePut(id, req, res) {
-  const data = await getData();
 
-  let learning = data.find((lrning) => lrning.id === id);
+  const data = await getData();
+  const learning = data.find((lrning) => lrning.id === id);
 
   try {
     if (!learning) {
@@ -112,10 +112,12 @@ export async function handlePut(id, req, res) {
       });
     }
 
-    learning.topic = parsedBody.topic;
-    learning.category = parsedBody.category;
-    learning.description = parsedBody.description;
-    learning.date = parsedBody.date;
+    const {topic , category, description, date} = parsedBody;
+
+    learning.topic = topic;
+    learning.category = category;
+    learning.description = description;
+    learning.date = date;
 
     await writeData(data);
     return sendResponse(res, 200, "application/json", {

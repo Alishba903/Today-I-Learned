@@ -1,12 +1,13 @@
 const form = document.getElementById("eventform");
 const formMessage = document.querySelector(".form-message");
+const topicInput = document.getElementById("title");
+const categoryInput = document.getElementById("category");
+const descriptionInput = document.getElementById("details");
 const submitBtn = document.getElementById("submit-btn");
-
-
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-submitButton.textContent = id ? "Update Learning" : "Add Learning";
+submitBtn.textContent = id ? "Update Learning" : "Add Learning";
 
 if (id) {
   const response = await fetch(`/api/${id}`);
@@ -18,19 +19,17 @@ if (id) {
 
   const data = await response.json();
 
-  document.getElementById("title").value = data.topic;
-  document.getElementById("category").value = data.category;
-  document.getElementById("details").value = data.description;
-
-  console.log(id, data);
+  topicInput.value = data.topic;
+  categoryInput.value = data.category;
+  descriptionInput.value = data.description;
 }
 
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
-  const topic = document.getElementById("title").value.trim();
-  const category = document.getElementById("category").value.trim();
-  const description = document.getElementById("details").value.trim();
+  const topic = topicInput.value.trim();
+  const category = categoryInput.value.trim();
+  const description = descriptionInput.value.trim();
 
   if (!topic || !category || !description) {
     formMessage.textContent = "Please Complete All Fields!";
@@ -56,7 +55,7 @@ form.addEventListener("submit", async function (event) {
   try {
     formMessage.textContent = "";
     const response = await fetch(url, {
-      method: method,
+      method,
       headers: {
         "Content-Type": "application/json",
       },
