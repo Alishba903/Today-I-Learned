@@ -7,7 +7,7 @@ const submitBtn = document.getElementById("submit-btn");
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-submitBtn.textContent = id ? "Update Learning" : "Add Learning";
+submitBtn.innerHTML = id ? `Update Learning <i class="fa-solid fa-arrows-rotate"></i>` : `Save Learning <i class="fa-solid fa-paper-plane">`;
 
 if (id) {
   const response = await fetch(`/api/${id}`);

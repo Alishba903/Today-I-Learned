@@ -1,3 +1,58 @@
 [
-  
+  {
+    "id": 1782978341581,
+    "favorite": false,
+    "topic": "Promises & Async/Await",
+    "category": "JavaScript",
+    "description": "Practiced handling asynchronous code using Promises and async/await for cleaner syntax and error handling.",
+    "date": "2 Jul 2026"
+  },
+  {
+    "id": 1782978462035,
+    "favorite": false,
+    "topic": "Functional Components",
+    "category": "React",
+    "description": "Learned how to build reusable UI blocks with functional components and hooks like useState and useEffect.",
+    "date": "2 Jul 2026"
+  },
+  {
+    "id": 1782979047329,
+    "favorite": false,
+    "topic": "MongoDB Basics",
+    "category": "Other",
+    "description": "Explored collections, documents, and CRUD operations in MongoDB using the native driver.",
+    "date": "2 Jul 2026"
+  },
+  {
+    "id": 1782979093539,
+    "favorite": false,
+    "topic": "Express Middleware",
+    "category": "Backend",
+    "description": "Implemented middleware functions in Express to handle logging, authentication, and error handling.",
+    "date": "2 Jul 2026"
+  },
+  {
+    "id": 1782979136792,
+    "favorite": false,
+    "topic": "Animations",
+    "category": "CSS",
+    "description": "Created smooth transitions and keyframe animations to enhance user experience.",
+    "date": "2 Jul 2026"
+  },
+  {
+    "id": 1782979185942,
+    "favorite": false,
+    "topic": "Branching & Merging",
+    "category": "Other",
+    "description": "Practiced creating branches, merging changes, and resolving conflicts in collaborative projects.",
+    "date": "2 Jul 2026"
+  },
+  {
+    "id": 1782979324518,
+    "favorite": false,
+    "topic": "Experiment",
+    "category": "Frontend",
+    "description": "Will it work ?",
+    "date": "2 Jul 2026"
+  }
 ]

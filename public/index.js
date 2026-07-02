@@ -1,14 +1,18 @@
 const cardsContainer = document.getElementById("cards-container");
+const search = document.getElementById("search");
+const categoryFilter = document.getElementById("category-filter");
+
+let allLearnings = [];
 
 try {
   const response = await fetch("/api");
 
-  if(!response.ok){
-    throw new Error("Failed to load learnings")
+  if (!response.ok) {
+    throw new Error("Failed to load learnings");
   }
 
-  const  learnings = await response.json();
-  renderLearnings(learnings);
+  allLearnings = await response.json();
+  renderLearnings(allLearnings);
 } catch (err) {
   console.log(err);
 }
@@ -18,16 +22,16 @@ function renderLearnings(learnings) {
     .map(
       (learning) => `
     <div class="card" data-id="${learning.id}">
-          <!-- Card Header -->
-          <div class="card-header">
-            <span class="category-name"> ${learning.category} </span>
-
-            <div class="card-date">
-              <i class="fa-regular fa-calendar"></i>
-
-              <span class="date-text"> ${learning.date} </span>
-            </div>
-          </div>
+    <!-- Card Header -->
+    <div class="card-header">
+    <span class="category-name"> ${learning.category} </span>
+    
+    <div class="card-date">
+    <i class="fa-regular fa-calendar"></i>
+    
+    <span class="date-text"> ${learning.date} </span>
+    </div>
+    </div>
 
           <!-- Card Body -->
           <div class="learning-details">
@@ -41,9 +45,9 @@ function renderLearnings(learnings) {
           <!-- Card Footer -->
           <div class="fav-del">
             <span class="favorite"> ${learning.favorite ? "★" : "☆"} </span>
-            <span class="edit">Edit</span>
+            <span class="edit"> <i class="fa-regular fa-pen-to-square edit"></i> </span>
 
-            <span class="delete"> Delete </span>
+            <span class="delete"> <i class="fa-solid fa-trash delete"></i> </span>
           </div>
         </div>`,
     )
@@ -74,22 +78,47 @@ cardsContainer.addEventListener("click", async (event) => {
     try {
       const response = await fetch(`/api/favorite/${id}`, { method: "PATCH" });
 
-      if(!response.ok){
-        throw new Error(`Server responded with ${response.status}`)
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
       }
 
       const data = await response.json();
       const favoriteElement = event.target;
 
       favoriteElement.textContent = data.favorite ? "★" : "☆";
-      
     } catch (err) {
-      console.error("Failed to update favorite:", err );
+      console.error("Failed to update favorite:", err);
     }
   } else if (event.target.classList.contains("edit")) {
     const card = event.target.closest(".card");
     const id = card.dataset.id;
 
     window.location.href = `new-learning.html?id=${id}`;
-}
+  }
 });
+
+search.addEventListener("input", applyFilters);
+categoryFilter.addEventListener("change", applyFilters);
+
+function applyFilters() {
+  const searchTerm = search.value.toLowerCase().trim();
+  const selectedCategory = categoryFilter.value.toLowerCase().trim();
+
+  let filteredLearnings = allLearnings;
+
+  filteredLearnings = filteredLearnings.filter((learning) => {
+    return (
+      learning.topic.toLowerCase().includes(searchTerm) ||
+      learning.category.toLowerCase().includes(searchTerm) ||
+      learning.description.toLowerCase().includes(searchTerm)
+    );
+  });
+
+  if (selectedCategory !== "all") {
+    filteredLearnings = filteredLearnings.filter((learning) => {
+      return learning.category.toLowerCase() === selectedCategory;
+    });
+  }
+
+  renderLearnings(filteredLearnings);
+}

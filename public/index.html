@@ -14,27 +14,49 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-      <header>
-        <div class="title-header">
-          <img class="logo-img" src="./images/book.png" alt="site logo" />
-          <div class="title">
-            <h3 class="site-title">Today I Learned</h3>
-            <p class="sub-title">Track your coding journey.</p>
-          </div>
+    <header>
+      <div class="title-header">
+        <img class="logo-img" src="./images/book.png" alt="site logo" />
+        <div class="title">
+          <h3 class="site-title">Today I Learned</h3>
+          <p class="sub-title">Track your coding journey.</p>
         </div>
+      </div>
 
-        <a href="new-learning.html" class="add-btn btn">
-          <i class="fa-solid fa-plus"></i>
-          Add New Learning
-        </a>
-      </header>
+      <a href="new-learning.html" class="add-btn btn">
+        <i class="fa-solid fa-plus"></i>
+        Add New Learning
+      </a>
+    </header>
 
-      <main id="cards-container" class="cards-container">
-        
-      </main>
+    <main>
+      <div class="filter">
+        <input type="text" id="search" placeholder="Search your learnings..." />
+        <select id="category-filter">
+          <option value="all">All Categories</option>
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="javascript">JavaScript</option>
+          <option value="node">Node</option>
+          <option value="react">React</option>
+          <option value="git & github">Git & Github</option>
+          <option value="backend">Backend</option>
+          <option value="frontend">Frontend</option>
+          <option value="ui/ux">UI/UX</option>
+          <option value="debugging">Debugging</option>
+        </select>
+      </div>
+      <div class="cards-container" id="cards-container"></div>
+    </main>
 
     <footer>
       <p>&copy; All right reserved by Alishba</p>
