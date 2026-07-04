@@ -1,6 +1,8 @@
 const cardsContainer = document.getElementById("cards-container");
 const search = document.getElementById("search");
 const categoryFilter = document.getElementById("category-filter");
+const sort = document.getElementById("sort");
+console.log(sort);
 
 let allLearnings = [];
 
@@ -99,13 +101,16 @@ cardsContainer.addEventListener("click", async (event) => {
 
 search.addEventListener("input", applyFilters);
 categoryFilter.addEventListener("change", applyFilters);
+sort.addEventListener("change", applyFilters);
 
 function applyFilters() {
   const searchTerm = search.value.toLowerCase().trim();
   const selectedCategory = categoryFilter.value.toLowerCase().trim();
-
-  let filteredLearnings = allLearnings;
-
+  const sortOption = sort.value;
+  console.log(sortOption);
+  
+  let filteredLearnings = [...allLearnings];
+  
   filteredLearnings = filteredLearnings.filter((learning) => {
     return (
       learning.topic.toLowerCase().includes(searchTerm) ||
@@ -113,12 +118,30 @@ function applyFilters() {
       learning.description.toLowerCase().includes(searchTerm)
     );
   });
-
+  
   if (selectedCategory !== "all") {
     filteredLearnings = filteredLearnings.filter((learning) => {
       return learning.category.toLowerCase() === selectedCategory;
     });
   }
+  
+  switch(sortOption){
+    case "az":
+      filteredLearnings.sort((a,b)=> a.topic.localeCompare(b.topic));
+      break;
+    case "za":
+      filteredLearnings.sort((a, b)=> b.topic.localeCompare(a.topic));
+      break;
+    case "newest":
+      filteredLearnings.sort((a,b)=> new Date(b.date) - new Date(a.date));
+      break;
+    case "oldest":
+      filteredLearnings.sort((a,b)=> new Date(a.date) - new Date(b.date));
+      break;
+    case "favorites":
+      filteredLearnings.sort((a,b) => (Number(b.favorite) - Number(a.favorite)))
+      break;
+    }
 
   renderLearnings(filteredLearnings);
 }
