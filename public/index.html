@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Today I learned</title>
+    <title>Today I Learned | Learning Tracker</title>
     <link rel="stylesheet" href="index.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
@@ -39,9 +39,9 @@
     </header>
 
     <main>
-      <div class="filter">
-        <input type="text" id="search" placeholder="Search your learnings..." />
-        <select id="category-filter">
+      <div class="filter-sort">
+        <input type="text" id="search" class="search-filter" placeholder="Search by topic, category, or description...." />
+        <select id="category-filter" class="category-filter">
           <option value="all">All Categories</option>
           <option value="html">HTML</option>
           <option value="css">CSS</option>
@@ -54,7 +54,7 @@
           <option value="ui/ux">UI/UX</option>
           <option value="debugging">Debugging</option>
         </select>
-        <select id="sort">
+        <select id="sort" class="sort">
           <option value="default">Default</option>
           <option value="newest">Newest First</option>
           <option value="oldest">Oldest First</option>
@@ -64,11 +64,15 @@
         </select>
       </div>
 
+      <div class="count">
+        <p class="results-count"></p>
+      </div>
+
       <div class="cards-container" id="cards-container"></div>
     </main>
 
     <footer>
-      <p>&copy; All right reserved by Alishba</p>
+      <p>&copy; 2026 Alishba. All rights reserved.</p>
     </footer>
 
     <script type="module" src="index.js"></script>

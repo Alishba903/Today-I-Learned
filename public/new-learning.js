@@ -7,9 +7,12 @@ const submitBtn = document.getElementById("submit-btn");
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-submitBtn.innerHTML = id ? `Update Learning <i class="fa-solid fa-arrows-rotate"></i>` : `Save Learning <i class="fa-solid fa-paper-plane">`;
+document.title = id ? "Today I Learned | Edit Learning" :  "Today I Learned | Add Learning";
+submitBtn.innerHTML = id ? `Update Learning <i class="fa-solid fa-arrows-rotate"></i>` : `Save Learning <i class="fa-solid fa-paper-plane"></i>`;
+
 
 if (id) {
+  try{
   const response = await fetch(`/api/${id}`);
 
   if (!response.ok) {
@@ -22,6 +25,9 @@ if (id) {
   topicInput.value = data.topic;
   categoryInput.value = data.category;
   descriptionInput.value = data.description;
+  } catch(err){
+    console.error(err);
+  }
 }
 
 form.addEventListener("submit", async function (event) {
@@ -69,8 +75,9 @@ form.addEventListener("submit", async function (event) {
     formMessage.innerHTML = id
       ? `Learning updated successfully. View it <a href="./index.html">here</a>.`
       : `Your learning was uploaded. View it <a href="./index.html">here</a>.`;
-
-    form.reset();
+    if(!id){
+      form.reset();
+    }
   } catch (err) {
     formMessage.textContent = "Oops! Something went wrong. Please try again.";
     console.error(err);

@@ -1,12 +1,13 @@
 const cardsContainer = document.getElementById("cards-container");
 const search = document.getElementById("search");
 const categoryFilter = document.getElementById("category-filter");
+const resultsCount = document.querySelector(".results-count");
 const sort = document.getElementById("sort");
-console.log(sort);
 
 let allLearnings = [];
 
 try {
+  cardsContainer.innerHTML = `<p class="loading-msg">Loading learnings...</p>`;
   const response = await fetch("/api");
 
   if (!response.ok) {
@@ -16,6 +17,7 @@ try {
   allLearnings = await response.json();
   renderLearnings(allLearnings);
 } catch (err) {
+  cardsContainer.innerHTML = `<h3 class="not-found">Failed to load learnings.</h3>`;
   console.log(err);
 }
 
@@ -59,9 +61,13 @@ function renderLearnings(learnings) {
 }
 
 cardsContainer.addEventListener("click", async (event) => {
+  const card = event.target.closest(".card");
+  if (!card) return;
+  const id = card.dataset.id;
+
   if (event.target.classList.contains("delete")) {
-    const card = event.target.closest(".card");
-    const id = card.dataset.id;
+    const confirmed = confirm("Are you sure you want to delete this learning?");
+    if (!confirmed) return;
 
     try {
       const response = await fetch(`/api/${id}`, { method: "DELETE" });
@@ -74,9 +80,6 @@ cardsContainer.addEventListener("click", async (event) => {
       console.error("Network error or server is down:", error);
     }
   } else if (event.target.classList.contains("favorite")) {
-    const card = event.target.closest(".card");
-    const id = card.dataset.id;
-
     try {
       const response = await fetch(`/api/favorite/${id}`, { method: "PATCH" });
 
@@ -92,9 +95,6 @@ cardsContainer.addEventListener("click", async (event) => {
       console.error("Failed to update favorite:", err);
     }
   } else if (event.target.classList.contains("edit")) {
-    const card = event.target.closest(".card");
-    const id = card.dataset.id;
-
     window.location.href = `new-learning.html?id=${id}`;
   }
 });
@@ -107,10 +107,9 @@ function applyFilters() {
   const searchTerm = search.value.toLowerCase().trim();
   const selectedCategory = categoryFilter.value.toLowerCase().trim();
   const sortOption = sort.value;
-  console.log(sortOption);
-  
+
   let filteredLearnings = [...allLearnings];
-  
+
   filteredLearnings = filteredLearnings.filter((learning) => {
     return (
       learning.topic.toLowerCase().includes(searchTerm) ||
@@ -118,30 +117,37 @@ function applyFilters() {
       learning.description.toLowerCase().includes(searchTerm)
     );
   });
-  
+
   if (selectedCategory !== "all") {
     filteredLearnings = filteredLearnings.filter((learning) => {
       return learning.category.toLowerCase() === selectedCategory;
     });
   }
-  
-  switch(sortOption){
+
+  switch (sortOption) {
     case "az":
-      filteredLearnings.sort((a,b)=> a.topic.localeCompare(b.topic));
+      filteredLearnings.sort((a, b) => a.topic.localeCompare(b.topic));
       break;
     case "za":
-      filteredLearnings.sort((a, b)=> b.topic.localeCompare(a.topic));
+      filteredLearnings.sort((a, b) => b.topic.localeCompare(a.topic));
       break;
     case "newest":
-      filteredLearnings.sort((a,b)=> new Date(b.date) - new Date(a.date));
+      filteredLearnings.sort((a, b) => new Date(b.date) - new Date(a.date));
       break;
     case "oldest":
-      filteredLearnings.sort((a,b)=> new Date(a.date) - new Date(b.date));
+      filteredLearnings.sort((a, b) => new Date(a.date) - new Date(b.date));
       break;
     case "favorites":
-      filteredLearnings.sort((a,b) => (Number(b.favorite) - Number(a.favorite)))
+      filteredLearnings.sort((a, b) => Number(b.favorite) - Number(a.favorite));
       break;
-    }
+  }
+
+  resultsCount.textContent = `Showing ${filteredLearnings.length} of ${allLearnings.length} learnings`;
+
+  if (filteredLearnings.length === 0) {
+    cardsContainer.innerHTML = `<h3 class="not-found">Learnings Not Found.</h3>`;
+    return;
+  }
 
   renderLearnings(filteredLearnings);
 }
