@@ -13,11 +13,11 @@ export async function handleGet(res) {
 export async function handleGetById(id, res) {
   const data = await getData();
 
-  const learning = data.find((lrning) => {
-    return lrning.id === id;
-  });
-
   try {
+    const learning = data.find((lrning) => {
+      return lrning.id === id;
+    });
+
     if (!learning) {
       return sendResponse(res, 404, "application/json", {
         message: "Learning Not Found",
@@ -44,6 +44,7 @@ export async function handlePost(req, res) {
     const newLearning = await addNewLearning(parsedBody);
     return sendResponse(res, 201, "application/json", newLearning);
   } catch (err) {
+    console.error(err);
     return sendResponse(res, 400, "application/json", { error: err.message });
   }
 }
@@ -81,7 +82,7 @@ export async function handlePatch(id, res) {
     await writeData(learnings);
     return sendResponse(res, 200, "application/json", {
       message: "Learning Updated Successfully",
-      favorite: learning.favorite,
+      learning,
     });
   } catch (err) {
     console.error(err);
@@ -93,7 +94,6 @@ export async function handlePatch(id, res) {
 }
 
 export async function handlePut(id, req, res) {
-
   const data = await getData();
   const learning = data.find((lrning) => lrning.id === id);
 
@@ -112,7 +112,7 @@ export async function handlePut(id, req, res) {
       });
     }
 
-    const {topic , category, description, date} = parsedBody;
+    const { topic, category, description, date } = parsedBody;
 
     learning.topic = topic;
     learning.category = category;
@@ -124,8 +124,8 @@ export async function handlePut(id, req, res) {
       message: "Learning Updated Successfully",
       learning,
     });
-
   } catch (err) {
+    console.error(err);
     return sendResponse(res, 400, "application/json", { error: err.message });
   }
 }

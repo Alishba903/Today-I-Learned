@@ -50,6 +50,7 @@ const server = http.createServer(async (req, res) => {
 
     serveStatic(req, res, __dirname);
   } catch (err) {
+    console.error(error);
     sendResponse(res, 500, "application/json", {
       message: "Internal Server Error"
     });

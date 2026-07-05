@@ -90,7 +90,8 @@ cardsContainer.addEventListener("click", async (event) => {
       const data = await response.json();
       const favoriteElement = event.target;
 
-      favoriteElement.textContent = data.favorite ? "★" : "☆";
+      favoriteElement.textContent = data.learning.favorite ? "★" : "☆";
+
     } catch (err) {
       console.error("Failed to update favorite:", err);
     }

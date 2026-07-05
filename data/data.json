@@ -5,7 +5,7 @@
     "topic": "Promises & Async/Await",
     "category": "JavaScript",
     "description": "Practiced handling asynchronous code using Promises and async/await for cleaner syntax and error handling.",
-    "date": "2 Jul 2026"
+    "date": "4 Jul 2026"
   },
   {
     "id": 1782978462035,
@@ -17,7 +17,7 @@
   },
   {
     "id": 1782979047329,
-    "favorite": false,
+    "favorite": true,
     "topic": "MongoDB Basics",
     "category": "Other",
     "description": "Explored collections, documents, and CRUD operations in MongoDB using the native driver.",
@@ -25,7 +25,7 @@
   },
   {
     "id": 1782979093539,
-    "favorite": false,
+    "favorite": true,
     "topic": "Express Middleware",
     "category": "Backend",
     "description": "Implemented middleware functions in Express to handle logging, authentication, and error handling.",
@@ -33,7 +33,7 @@
   },
   {
     "id": 1782979136792,
-    "favorite": false,
+    "favorite": true,
     "topic": "Animations",
     "category": "CSS",
     "description": "Created smooth transitions and keyframe animations to enhance user experience.",
@@ -50,9 +50,17 @@
   {
     "id": 1782979324518,
     "favorite": false,
-    "topic": "Experiment",
-    "category": "Frontend",
-    "description": "Will it work ?",
-    "date": "2 Jul 2026"
+    "topic": "Today I Learned",
+    "category": "Other",
+    "description": "routing\nparsing\nserving static files\nCRUD\nJSON storage",
+    "date": "5 Jul 2026"
+  },
+  {
+    "id": 1783237068223,
+    "favorite": false,
+    "topic": "Final Check",
+    "category": "Debugging",
+    "description": "Checking final application.",
+    "date": "5 Jul 2026"
   }
 ]
